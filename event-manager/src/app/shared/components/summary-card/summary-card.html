@@ -1,0 +1,19 @@
+<mat-card class="summary-card" [ngClass]="color">
+
+  <div class="header">
+
+    <span class="title">
+      {{ title }}
+    </span>
+
+    <mat-icon>
+      {{ icon }}
+    </mat-icon>
+
+  </div>
+
+  <div class="amount">
+    {{ amount | currency:'INR':'symbol':'1.0-0' }}
+  </div>
+
+</mat-card>

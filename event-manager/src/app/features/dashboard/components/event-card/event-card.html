@@ -1,0 +1,57 @@
+<mat-card class="event-card">
+
+    <mat-card-title>
+
+        {{event.name}}
+
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div class="summary">
+
+            <div class="income">
+
+                Income
+
+                <strong>{{income | currency:'INR'}}</strong>
+
+            </div>
+
+            <div class="expense">
+
+                Expense
+
+                <strong>{{expense | currency:'INR'}}</strong>
+
+            </div>
+
+            <div class="balance">
+
+                Balance
+
+                <strong>{{income-expense | currency:'INR'}}</strong>
+
+            </div>
+
+        </div>
+
+        <p>
+
+            {{transactionCount}} Transactions
+
+        </p>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+
+        <button mat-flat-button color="primary" (click)="openEvent()">
+
+            Open
+
+        </button>
+
+    </mat-card-actions>
+
+</mat-card>

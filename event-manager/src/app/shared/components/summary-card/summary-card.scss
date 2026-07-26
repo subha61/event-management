@@ -1,0 +1,70 @@
+.summary-card {
+
+  padding: 18px;
+  border-radius: 16px;
+  transition: .2s ease;
+
+}
+
+.summary-card:hover {
+
+  transform: translateY(-2px);
+
+}
+
+.header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.title {
+
+  font-size: 14px;
+  color: #6B7280;
+  font-weight: 500;
+
+}
+
+.amount {
+
+  margin-top: 18px;
+  font-size: 26px;
+  font-weight: 700;
+
+}
+
+.green {
+
+  background: #DCFCE7;
+
+  .amount,
+  mat-icon {
+    color: #15803D;
+  }
+
+}
+
+.red {
+
+  background: #FEE2E2;
+
+  .amount,
+  mat-icon {
+    color: #B91C1C;
+  }
+
+}
+
+.blue {
+
+  background: #DBEAFE;
+
+  .amount,
+  mat-icon {
+    color: #1D4ED8;
+  }
+
+}

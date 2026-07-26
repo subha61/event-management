@@ -1,0 +1,413 @@
+.dashboard {
+    max-width: 1300px;
+    margin: auto;
+    padding: 24px;
+}
+
+/* ===========================
+        Header
+=========================== */
+
+.header {
+
+    margin-bottom: 32px;
+
+}
+
+.header-content{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.header p{
+
+    margin-top:6px;
+
+    color:#6b7280;
+
+}
+
+/* ===========================
+        Grid
+=========================== */
+
+.event-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+
+    gap:24px;
+
+}
+
+/* ===========================
+        Card
+=========================== */
+
+.event-card{
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    border:1px solid #ececec;
+
+    overflow:hidden;
+
+    padding:22px;
+
+}
+
+.event-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.10);
+
+}
+
+.card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+.title-section h2{
+
+    margin:0;
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+.title-section span{
+
+    margin-top:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:#757575;
+
+    font-size:14px;
+
+}
+
+.title-section mat-icon{
+
+    font-size:18px;
+
+    width:18px;
+
+    height:18px;
+
+}
+
+/* ===========================
+        Balance
+=========================== */
+
+.balance-section{
+
+    text-align:right;
+
+}
+
+.balance-section small{
+
+    color:#757575;
+
+}
+
+.balance-section h1{
+
+    margin:6px 0 0;
+
+    color:#1976d2;
+
+    font-size:32px;
+
+    font-weight:700;
+
+}
+
+/* ===========================
+        Income Expense
+=========================== */
+
+.stats{
+
+    display:flex;
+
+    gap:16px;
+
+    margin:24px 0;
+
+}
+
+.stat{
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    border-radius:14px;
+
+    padding:14px;
+
+}
+
+.stat mat-icon{
+
+    font-size:30px;
+
+    width:30px;
+
+    height:30px;
+
+}
+
+.stat span{
+
+    display:block;
+
+    color:#6b7280;
+
+    font-size:13px;
+
+}
+
+.stat strong{
+
+    font-size:20px;
+
+}
+
+.income{
+
+    background:#ecfdf5;
+
+}
+
+.income mat-icon,
+
+.income strong{
+
+    color:#16a34a;
+
+}
+
+.expense{
+
+    background:#fef2f2;
+
+}
+
+.expense mat-icon,
+
+.expense strong{
+
+    color:#dc2626;
+
+}
+
+/* ===========================
+        Divider
+=========================== */
+
+.divider{
+
+    height:1px;
+
+    background:#eeeeee;
+
+}
+
+/* ===========================
+        Footer
+=========================== */
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:18px;
+
+}
+
+.transaction-count{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#616161;
+
+}
+
+.open-event{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:#1976d2;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+        Empty
+=========================== */
+
+.empty{
+
+    border:2px dashed #d6d6d6;
+
+    border-radius:20px;
+
+    padding:80px 20px;
+
+    text-align:center;
+
+}
+
+.empty mat-icon{
+
+    width:70px;
+
+    height:70px;
+
+    font-size:70px;
+
+    color:#9ca3af;
+
+}
+
+.empty h2{
+
+    margin:18px 0 10px;
+
+}
+
+.empty p{
+
+    color:#6b7280;
+
+    margin-bottom:24px;
+
+}
+
+/* ===========================
+        Mobile
+=========================== */
+
+@media(max-width:768px){
+
+    .dashboard{
+
+        padding:16px;
+
+    }
+
+    .header-content{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .header h1{
+
+        font-size:28px;
+
+    }
+
+    .event-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+    }
+
+    .card-top{
+
+        flex-direction:column;
+
+    }
+
+    .balance-section{
+
+        text-align:left;
+
+    }
+
+    .balance-section h1{
+
+        font-size:30px;
+
+    }
+
+    .stats{
+
+        flex-direction:column;
+
+    }
+
+    .card-footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+
+    }
+
+}

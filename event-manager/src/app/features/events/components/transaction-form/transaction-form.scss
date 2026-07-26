@@ -1,0 +1,66 @@
+.full-width {
+  width: 100%;
+}
+
+mat-card {
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.type-container {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.type-toggle {
+  width: 100%;
+  display: flex;
+}
+
+.type-toggle .mat-button-toggle {
+  flex: 1;
+}
+
+.type-toggle .mat-button-toggle-button {
+  width: 100%;
+}
+.type-toggle {
+  width: 100%;
+  display: flex;
+}
+
+.type-toggle mat-button-toggle {
+  flex: 1;
+}
+
+button {
+  margin-top: 12px;
+}
+
+.quick-amount{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+
+}
+
+.action-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.action-buttons button{
+
+    flex:1;
+
+}

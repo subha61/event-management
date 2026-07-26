@@ -1,0 +1,224 @@
+.transaction-card {
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.amount {
+  font-size: 22px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.income-amount {
+  color: #16a34a;
+}
+
+.expense-amount {
+  color: #dc2626;
+}
+
+.footer {
+  margin-top: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.income {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.expense {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.date {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.swipe-card {
+
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+
+}
+
+.swipe-background {
+
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: background .2s;
+
+}
+
+.swipe-background.edit {
+
+  background: #16a34a;
+
+  justify-content: flex-start;
+
+  padding-left: 24px;
+
+}
+
+.swipe-background.delete {
+
+  background: #dc2626;
+
+  justify-content: flex-end;
+
+  padding-right: 24px;
+
+}
+
+.action {
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-weight: 600;
+
+}
+
+.transaction-card {
+
+  position: relative;
+
+  transition: transform .2s ease;
+
+  touch-action: pan-y;
+
+  will-change: transform;
+
+}
+
+@media (max-width: 600px) {
+
+  .amount {
+    font-size: 18px;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+}
+
+.transaction-card {
+
+    position: relative;
+
+}
+
+.desktop-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 14px;
+
+    opacity: 0;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    transform: translateY(10px);
+
+    transition: all .25s ease;
+
+}
+
+.transaction-card:hover .desktop-actions {
+
+    opacity: 1;
+
+    max-height: 60px;
+
+    transform: translateY(0);
+
+}
+
+.desktop-actions button {
+
+    height: 34px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    padding: 0 14px;
+
+}

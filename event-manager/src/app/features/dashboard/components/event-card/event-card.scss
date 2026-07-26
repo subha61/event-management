@@ -1,0 +1,65 @@
+.event-card {
+
+    border-radius: 18px;
+
+    margin-bottom: 18px;
+
+    transition: .25s;
+
+}
+
+.event-card:hover{
+
+    transform: translateY(-4px);
+
+}
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin:20px 0;
+
+}
+
+.summary div{
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:12px;
+
+}
+
+.income{
+
+    background:#E8F5E9;
+
+}
+
+.expense{
+
+    background:#FFEBEE;
+
+}
+
+.balance{
+
+    background:#E3F2FD;
+
+}
+
+@media(max-width:600px){
+
+.summary{
+
+grid-template-columns:1fr;
+
+}
+
+}

@@ -1,0 +1,28 @@
+@if (transactions.length === 0) {
+
+  <mat-card class="empty-state">
+
+    <mat-icon>receipt_long</mat-icon>
+
+    <h2>No Transactions Yet</h2>
+
+    <p>
+        Add your first income or expense.
+        It will appear here instantly.
+    </p>
+
+</mat-card>
+
+} @else {
+
+  @for (transaction of transactions; track transaction.id) {
+
+    <app-transaction-item
+    [transaction]="transaction"
+    (edit)="edit.emit($event)"
+    (delete)="delete.emit($event)">
+    </app-transaction-item>
+
+  }
+
+}

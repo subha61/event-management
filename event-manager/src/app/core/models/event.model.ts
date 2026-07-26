@@ -1,5 +1,13 @@
 export interface EventModel {
   id: string;
-  eventName: string;
+
+  name: string;
+
+  description?: string;
+
+  location?: string;
+
   createdAt: string;
+
+  updatedAt?: string;
 }

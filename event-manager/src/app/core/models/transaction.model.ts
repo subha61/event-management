@@ -8,7 +8,7 @@ export interface TransactionModel {
 
   name: string;
 
-  purpose: string;
+  description: string;
 
   type: TransactionType;
 

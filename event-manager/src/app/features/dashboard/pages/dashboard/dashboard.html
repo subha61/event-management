@@ -1,0 +1,147 @@
+<div class="dashboard">
+
+  <div class="header">
+
+    <div class="header-content">
+
+      <div>
+        <h1>🇮🇳 Event Money Manager</h1>
+        <p>Manage every event with ease</p>
+      </div>
+
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="openDialog()">
+
+        <mat-icon>add</mat-icon>
+        New Event
+
+      </button>
+
+    </div>
+
+  </div>
+
+  @if (hasEvents()) {
+
+  <div class="event-grid">
+
+    @for (event of events(); track event.id) {
+
+    <mat-card
+      class="event-card"
+      (click)="openEvent(event.id)">
+
+      <div class="card-top">
+
+        <div class="title-section">
+
+          <h2>🎉 {{ event.name }}</h2>
+
+          <span>
+
+            <mat-icon>calendar_today</mat-icon>
+
+            {{ event.createdAt | date:'dd MMM yyyy' }}
+
+          </span>
+
+        </div>
+
+        <div class="balance-section">
+
+          <small>Balance</small>
+
+          <h1>₹{{ event.balance }}</h1>
+
+        </div>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat income">
+
+          <mat-icon>trending_up</mat-icon>
+
+          <div>
+
+            <span>Income</span>
+
+            <strong>₹{{ event.income }}</strong>
+
+          </div>
+
+        </div>
+
+        <div class="stat expense">
+
+          <mat-icon>trending_down</mat-icon>
+
+          <div>
+
+            <span>Expense</span>
+
+            <strong>₹{{ event.expense }}</strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card-footer">
+
+        <div class="transaction-count">
+
+          <mat-icon>receipt_long</mat-icon>
+
+          {{ event.transactionCount }} Transactions
+
+        </div>
+
+        <div class="open-event">
+
+          Open
+
+          <mat-icon>arrow_forward</mat-icon>
+
+        </div>
+
+      </div>
+
+    </mat-card>
+
+    }
+
+  </div>
+
+  } @else {
+
+  <div class="empty">
+
+    <mat-icon>event_busy</mat-icon>
+
+    <h2>No Events Yet</h2>
+
+    <p>Create your first event and start tracking money.</p>
+
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="openDialog()">
+
+      <mat-icon>add</mat-icon>
+
+      Create Event
+
+    </button>
+
+  </div>
+
+  }
+
+</div>

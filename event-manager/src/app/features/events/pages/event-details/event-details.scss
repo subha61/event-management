@@ -1,0 +1,95 @@
+.page{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:20px;
+
+}
+
+.full-width{
+
+    width:100%;
+
+}
+
+.summary-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.summary-container app-summary-card {
+  flex: 0 0 220px;
+}
+
+@media (min-width: 769px) {
+
+  .summary-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+  }
+
+  .summary-container app-summary-card {
+    flex: unset;
+  }
+
+}
+
+/* ==========================
+        Toolbar
+========================== */
+
+.toolbar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-field {
+    flex: 1;
+}
+
+.filter-field {
+    width: 180px;
+}
+
+/* Remove extra spacing from Material fields */
+.toolbar mat-form-field {
+    margin: 0;
+}
+
+/* ==========================
+        Mobile
+========================== */
+
+@media (max-width: 768px) {
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .search-field,
+    .filter-field {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,115 @@
+<div class="page">
+
+    <!-- Header -->
+
+    <section class="header">
+
+        <button
+            mat-icon-button
+            (click)="back()">
+
+            <mat-icon>
+
+                arrow_back
+
+            </mat-icon>
+
+        </button>
+
+        <h1>
+
+            {{event?.name}}
+
+        </h1>
+
+    </section>
+
+    <!-- Summary -->
+
+    <section class="summary-container">
+    
+        <app-summary-card 
+        title="Income" 
+        icon="trending_up" 
+        [amount]="income()" 
+        color="green">
+        </app-summary-card>
+    
+        <app-summary-card 
+        title="Expense" 
+        icon="trending_down" 
+        [amount]="expense()" 
+        color="red">
+        </app-summary-card>
+    
+        <app-summary-card 
+        title="Balance" 
+        icon="account_balance_wallet" 
+        [amount]="balance()" 
+        color="blue">
+        </app-summary-card>
+    
+    </section>
+
+    <!-- Transaction Form -->
+
+    <section>
+    
+        <app-transaction-form 
+        [transaction]="editingTransaction" 
+        (add)="addTransaction($event)"
+        (update)="updateTransaction($event)" 
+        (cancel)="cancelEdit()">
+    
+        </app-transaction-form>
+    
+    </section>
+
+    <!-- Search -->
+
+    @if (showToolbar()) {
+
+<section class="toolbar">
+
+    <mat-form-field appearance="outline">
+
+        <mat-label>Search</mat-label>
+
+        <input
+            matInput
+            placeholder="🔍 Search by name or description">
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+
+        <mat-label>Filter</mat-label>
+
+        <mat-select>
+
+            <mat-option value="all">All</mat-option>
+
+            <mat-option value="income">Income</mat-option>
+
+            <mat-option value="expense">Expense</mat-option>
+
+        </mat-select>
+
+    </mat-form-field>
+
+</section>
+
+}
+    <!-- Transaction List -->
+
+    <section>
+    
+        <app-transaction-list 
+        [transactions]="transactions()" 
+        (edit)="editTransaction($event)"
+        (delete)="deleteTransaction($event)">
+        </app-transaction-list>
+    
+    </section>
+
+</div>
