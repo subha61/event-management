@@ -1,7 +1,10 @@
 import {
   Component,
   computed,
-  inject
+  HostListener,
+  inject,
+  signal,
+  ViewChild
 } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,8 +20,12 @@ import { MatInputModule } from '@angular/material/input';
 import { TransactionList } from '../../components/transaction-list/transaction-list';
 import { TransactionModel } from '../../../../core/models/transaction.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatOption } from "@angular/material/core";
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { FilterBottomSheet } from '../../../../shared/components/filter-bottom-sheet/filter-bottom-sheet';
+type TransactionFilter = 'all' | 'income' | 'expense';
 
 @Component({
   selector: 'app-event-details',
@@ -31,9 +38,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     TransactionList,
     MatSnackBarModule,
-    MatOption,
-    MatSelectModule
-],
+    MatSelectModule,
+    MatMenuModule,
+  ],
   templateUrl: './event-details.html',
   styleUrls: ['./event-details.scss'],
 })
@@ -56,13 +63,61 @@ export class EventDetails {
 
   readonly balance = computed(() => this.transactionFacade.getBalance(this.eventId));
 
-  readonly transactions = computed(() => this.transactionFacade.getByEvent(this.eventId));
+  readonly allTransactions = computed(() => this.transactionFacade.getByEvent(this.eventId));
+
+  readonly transactions = computed(() => {
+    let transactions = [...this.allTransactions()];
+
+    // Filter
+    if (this.filter() !== 'all') {
+      transactions = transactions.filter((item) => item.type === this.filter());
+    }
+
+    // Search
+    const keyword = this.search().trim().toLowerCase();
+
+    if (keyword) {
+      transactions = transactions.filter((item) => {
+        return (
+          item.name.toLowerCase().includes(keyword) ||
+          item.description.toLowerCase().includes(keyword) ||
+          item.amount.toString().includes(keyword)
+        );
+      });
+    }
+
+    return transactions;
+  });
 
   editingTransaction: TransactionModel | null = null;
 
   private readonly snackBar = inject(MatSnackBar);
 
-  readonly showToolbar = computed(() => this.transactions().length >= 5);
+  readonly showToolbar = computed(() => this.allTransactions().length > 0);
+
+  readonly toolbarElevated = signal(false);
+
+  readonly filter = signal<TransactionFilter>('all');
+
+  private readonly bottomSheet = inject(MatBottomSheet);
+
+  readonly search = signal('');
+
+  readonly isMobile = signal(false);
+
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobile.set(window.innerWidth <= 768);
+  }
+
+  ngOnInit() {
+    this.onResize();
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.toolbarElevated.set(window.scrollY > 40);
+  }
 
   back() {
     this.router.navigateByUrl('/');
@@ -96,5 +151,33 @@ export class EventDetails {
     snackBarRef.onAction().subscribe(() => {
       this.transactionFacade.restore(deleted);
     });
+  }
+
+  changeFilter(filter: TransactionFilter): void {
+    this.filter.set(filter);
+  }
+
+  openFilter(): void {
+    if (this.isMobile()) {
+      const ref = this.bottomSheet.open(FilterBottomSheet, {
+        data: this.filter(),
+      });
+
+      ref.afterDismissed().subscribe((filter) => {
+        if (filter) {
+          this.changeFilter(filter);
+        }
+      });
+    }
+  }
+
+  onSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+
+    this.search.set(value);
+  }
+
+  clearSearch(): void {
+    this.search.set('');
   }
 }

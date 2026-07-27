@@ -68,44 +68,115 @@
     <!-- Search -->
 
     @if (showToolbar()) {
-
-<section class="toolbar">
-
-    <mat-form-field appearance="outline">
-
-        <mat-label>Search</mat-label>
-
-        <input
-            matInput
-            placeholder="🔍 Search by name or description">
-
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-
-        <mat-label>Filter</mat-label>
-
-        <mat-select>
-
-            <mat-option value="all">All</mat-option>
-
-            <mat-option value="income">Income</mat-option>
-
-            <mat-option value="expense">Expense</mat-option>
-
-        </mat-select>
-
-    </mat-form-field>
-
-</section>
-
-}
+    
+    <div class="toolbar-wrapper" [class.elevated]="toolbarElevated()">
+    
+        <div class="search-toolbar">
+    
+            <div class="search-box">
+    
+                <mat-icon>search</mat-icon>
+    
+                <input type="text" placeholder="Search name, description or amount" 
+                autocomplete="off" [value]="search()"
+                (input)="onSearch($event)">
+    
+            @if(search()){
+            
+            <button mat-icon-button class="clear-btn" (click)="clearSearch()">
+            
+                <mat-icon>
+            
+                    close
+            
+                </mat-icon>
+            
+            </button>
+            
+            }
+    
+            </div>
+            @if (isMobile()) {
+            
+            <button mat-icon-button class="filter-btn" (click)="openFilter()">
+            
+                <mat-icon>tune</mat-icon>
+            
+            </button>
+            
+            } @else {
+            
+            <button mat-icon-button class="filter-btn" [matMenuTriggerFor]="filterMenu">
+            
+                <mat-icon>tune</mat-icon>
+            
+            </button>
+            
+            }
+    
+            <mat-menu #filterMenu="matMenu">
+    
+                <button mat-menu-item (click)="changeFilter('all')">
+    
+                    <mat-icon>
+    
+                        @if(filter() === 'all'){
+                        check
+                        }
+    
+                    </mat-icon>
+    
+                    <span>All</span>
+    
+                </button>
+    
+                <button mat-menu-item (click)="changeFilter('income')">
+    
+                    <mat-icon>
+    
+                        @if(filter() === 'income'){
+                        check
+                        }
+    
+                    </mat-icon>
+    
+                    <span>Income</span>
+    
+                </button>
+    
+                <button mat-menu-item (click)="changeFilter('expense')">
+    
+                    <mat-icon>
+    
+                        @if(filter() === 'expense'){
+                        check
+                        }
+    
+                    </mat-icon>
+    
+                    <span>Expense</span>
+    
+                </button>
+    
+            </mat-menu>
+    
+        </div>
+    
+    </div>
+    
+    }
     <!-- Transaction List -->
 
     <section>
     
         <app-transaction-list 
         [transactions]="transactions()" 
+        [emptyTitle]="search() || filter() !== 'all'
+        ? 'No matching transactions'
+        : 'No Transactions Yet'"
+        [emptyMessage]="search() || filter() !== 'all'
+        ? 'Try another search or clear the filter.'
+        : 'Add your first transaction.'"
         (edit)="editTransaction($event)"
         (delete)="deleteTransaction($event)">
         </app-transaction-list>

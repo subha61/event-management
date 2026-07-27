@@ -1,0 +1,45 @@
+<h3 class="title">
+
+    Filter Transactions
+
+</h3>
+
+<mat-nav-list>
+
+    <a mat-list-item (click)="select('all')">
+
+        <mat-icon matListItemIcon>
+
+            {{ selected === 'all' ? 'check_circle' : 'radio_button_unchecked' }}
+
+        </mat-icon>
+
+        <span matListItemTitle>All</span>
+
+    </a>
+
+    <a mat-list-item (click)="select('income')">
+
+        <mat-icon matListItemIcon>
+
+            {{ selected === 'income' ? 'check_circle' : 'radio_button_unchecked' }}
+
+        </mat-icon>
+
+        <span matListItemTitle>Income</span>
+
+    </a>
+
+    <a mat-list-item (click)="select('expense')">
+
+        <mat-icon matListItemIcon>
+
+            {{ selected === 'expense' ? 'check_circle' : 'radio_button_unchecked' }}
+
+        </mat-icon>
+
+        <span matListItemTitle>Expense</span>
+
+    </a>
+
+</mat-nav-list>

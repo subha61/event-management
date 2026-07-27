@@ -12,14 +12,18 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './transaction-list.scss',
 })
 export class TransactionList {
-
-  @Input({required:true})
-  transactions: TransactionModel[]=[];
+  @Input({ required: true })
+  transactions: TransactionModel[] = [];
 
   @Output()
   edit = new EventEmitter<TransactionModel>();
 
   @Output()
   delete = new EventEmitter<TransactionModel>();
+  
+  @Input()
+  emptyTitle = 'No Transactions';
 
+  @Input()
+  emptyMessage = 'Add your first transaction.';
 }
