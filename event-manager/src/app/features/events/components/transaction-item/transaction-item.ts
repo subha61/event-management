@@ -63,11 +63,11 @@ export class TransactionItem {
 
   onTouchEnd(): void {
 
-    if (this.translateX >= 70) {
+    if (this.translateX >= this.MAX_TRANSLATE) {
 
       this.edit.emit(this.transaction);
 
-    } else if (this.translateX <= -70) {
+    } else if (this.translateX <= -this.MAX_TRANSLATE) {
 
       this.delete.emit(this.transaction);
 
