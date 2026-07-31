@@ -1,45 +1,109 @@
-<h3 class="title">
-
+<h2 class="title">
     Filter Transactions
+</h2>
 
-</h3>
+<div class="filter-card">
 
-<mat-nav-list>
+    <div class="section-title">
+        Type
+    </div>
 
-    <a mat-list-item (click)="select('all')">
+    <div class="option"
+        [class.selected]="selectedType === 'all'"
+        (click)="selectedType='all'">
 
-        <mat-icon matListItemIcon>
-
-            {{ selected === 'all' ? 'check_circle' : 'radio_button_unchecked' }}
-
+        <mat-icon>
+            {{ selectedType === 'all' ? 'check_circle' : 'radio_button_unchecked' }}
         </mat-icon>
 
-        <span matListItemTitle>All</span>
+        <span>All</span>
 
-    </a>
+    </div>
 
-    <a mat-list-item (click)="select('income')">
+    <div class="option"
+        [class.selected]="selectedType === 'income'"
+        (click)="selectedType='income'">
 
-        <mat-icon matListItemIcon>
-
-            {{ selected === 'income' ? 'check_circle' : 'radio_button_unchecked' }}
-
+        <mat-icon>
+            {{ selectedType === 'income' ? 'check_circle' : 'radio_button_unchecked' }}
         </mat-icon>
 
-        <span matListItemTitle>Income</span>
+        <span>Income</span>
 
-    </a>
+    </div>
 
-    <a mat-list-item (click)="select('expense')">
+    <div class="option"
+        [class.selected]="selectedType === 'expense'"
+        (click)="selectedType='expense'">
 
-        <mat-icon matListItemIcon>
-
-            {{ selected === 'expense' ? 'check_circle' : 'radio_button_unchecked' }}
-
+        <mat-icon>
+            {{ selectedType === 'expense' ? 'check_circle' : 'radio_button_unchecked' }}
         </mat-icon>
 
-        <span matListItemTitle>Expense</span>
+        <span>Expense</span>
 
-    </a>
+    </div>
 
-</mat-nav-list>
+</div>
+
+<div class="filter-card">
+
+    <div class="section-title">
+        Date
+    </div>
+
+    <div class="option"
+        [class.selected]="selectedDate === 'all'"
+        (click)="selectedDate='all'">
+
+        <mat-icon>
+            {{ selectedDate === 'all' ? 'check_circle' : 'radio_button_unchecked' }}
+        </mat-icon>
+
+        <span>All Dates</span>
+
+    </div>
+
+    <div class="option"
+        [class.selected]="selectedDate === 'today'"
+        (click)="selectedDate='today'">
+
+        <mat-icon>
+            {{ selectedDate === 'today' ? 'check_circle' : 'radio_button_unchecked' }}
+        </mat-icon>
+
+        <span>Today</span>
+
+    </div>
+
+    <div class="option"
+        [class.selected]="selectedDate === 'yesterday'"
+        (click)="selectedDate='yesterday'">
+
+        <mat-icon>
+            {{ selectedDate === 'yesterday' ? 'check_circle' : 'radio_button_unchecked' }}
+        </mat-icon>
+
+        <span>Yesterday</span>
+
+    </div>
+
+</div>
+
+<div class="actions">
+
+    <button class="cancel-btn" (click)="close()">
+
+        Cancel
+
+    </button>
+
+    <button class="apply-btn" (click)="apply()">
+
+        <mat-icon>check</mat-icon>
+
+        <span>Apply</span>
+
+    </button>
+
+</div>

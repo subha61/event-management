@@ -13,27 +13,34 @@ export type TransactionFilter = 'all' | 'income' | 'expense';
 
 @Component({
   selector: 'app-filter-bottom-sheet',
-  imports: [
-    CommonModule,
-    MatListModule,
-    MatIconModule,
-  ],
+  imports: [CommonModule, MatListModule, MatIconModule],
   templateUrl: './filter-bottom-sheet.html',
   styleUrls: ['./filter-bottom-sheet.scss'],
 })
 export class FilterBottomSheet {
+  selectedType: 'all' | 'income' | 'expense';
+
+  selectedDate: 'all' | 'today' | 'yesterday';
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA)
-    public selected: TransactionFilter,
+    public data: any,
 
-    private bottomSheetRef: MatBottomSheetRef<FilterBottomSheet>,
-  ) {}
+    private readonly sheetRef: MatBottomSheetRef<FilterBottomSheet>,
+  ) {
+    this.selectedType = data.type;
 
-  select(filter: TransactionFilter) {
-
-    this.bottomSheetRef.dismiss(filter);
-
+    this.selectedDate = data.date;
   }
 
+  apply(): void {
+    this.sheetRef.dismiss({
+      type: this.selectedType,
+
+      date: this.selectedDate,
+    });
+  }
+  close(): void {
+    this.sheetRef.dismiss();
+  }
 }

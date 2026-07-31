@@ -25,7 +25,10 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { FilterBottomSheet } from '../../../../shared/components/filter-bottom-sheet/filter-bottom-sheet';
-type TransactionFilter = 'all' | 'income' | 'expense';
+import { MatDividerModule } from '@angular/material/divider';
+type TransactionTypeFilter = 'all' | 'income' | 'expense';
+
+type TransactionDateFilter = 'all' | 'today' | 'yesterday';
 
 @Component({
   selector: 'app-event-details',
@@ -40,6 +43,7 @@ type TransactionFilter = 'all' | 'income' | 'expense';
     MatSnackBarModule,
     MatSelectModule,
     MatMenuModule,
+    MatDividerModule
   ],
   templateUrl: './event-details.html',
   styleUrls: ['./event-details.scss'],
@@ -69,8 +73,19 @@ export class EventDetails {
     let transactions = [...this.allTransactions()];
 
     // Filter
-    if (this.filter() !== 'all') {
-      transactions = transactions.filter((item) => item.type === this.filter());
+    if (this.typeFilter() !== 'all') {
+      transactions = transactions.filter((item) => item.type === this.typeFilter());
+    }
+
+    // Date filter
+    switch (this.dateFilter()) {
+      case 'today':
+        transactions = transactions.filter((item) => this.isToday(item.createdAt));
+        break;
+
+      case 'yesterday':
+        transactions = transactions.filter((item) => this.isYesterday(item.createdAt));
+        break;
     }
 
     // Search
@@ -97,7 +112,9 @@ export class EventDetails {
 
   readonly toolbarElevated = signal(false);
 
-  readonly filter = signal<TransactionFilter>('all');
+  readonly typeFilter = signal<TransactionTypeFilter>('all');
+
+  readonly dateFilter = signal<TransactionDateFilter>('all');
 
   private readonly bottomSheet = inject(MatBottomSheet);
 
@@ -153,19 +170,27 @@ export class EventDetails {
     });
   }
 
-  changeFilter(filter: TransactionFilter): void {
-    this.filter.set(filter);
+  changeTypeFilter(filter: TransactionTypeFilter) {
+    this.typeFilter.set(filter);
+  }
+
+  changeDateFilter(filter: TransactionDateFilter) {
+    this.dateFilter.set(filter);
   }
 
   openFilter(): void {
     if (this.isMobile()) {
       const ref = this.bottomSheet.open(FilterBottomSheet, {
-        data: this.filter(),
+        data: {
+          type: this.typeFilter(),
+          date: this.dateFilter(),
+        },
       });
 
       ref.afterDismissed().subscribe((filter) => {
         if (filter) {
-          this.changeFilter(filter);
+          this.changeTypeFilter(filter.type);
+          this.changeDateFilter(filter.date);
         }
       });
     }
@@ -179,5 +204,31 @@ export class EventDetails {
 
   clearSearch(): void {
     this.search.set('');
+  }
+
+  private isToday(date: string): boolean {
+    const today = new Date();
+
+    const value = new Date(date);
+
+    return (
+      value.getDate() === today.getDate() &&
+      value.getMonth() === today.getMonth() &&
+      value.getFullYear() === today.getFullYear()
+    );
+  }
+
+  private isYesterday(date: string): boolean {
+    const yesterday = new Date();
+
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const value = new Date(date);
+
+    return (
+      value.getDate() === yesterday.getDate() &&
+      value.getMonth() === yesterday.getMonth() &&
+      value.getFullYear() === yesterday.getFullYear()
+    );
   }
 }

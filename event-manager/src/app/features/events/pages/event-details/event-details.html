@@ -98,7 +98,8 @@
             </div>
             @if (isMobile()) {
             
-            <button mat-icon-button class="filter-btn" (click)="openFilter()">
+            <button mat-icon-button class="filter-btn" (click)="openFilter()"
+            [class.active]="typeFilter() !== 'all' || dateFilter() !== 'all'">
             
                 <mat-icon>tune</mat-icon>
             
@@ -106,7 +107,8 @@
             
             } @else {
             
-            <button mat-icon-button class="filter-btn" [matMenuTriggerFor]="filterMenu">
+            <button mat-icon-button class="filter-btn" [matMenuTriggerFor]="filterMenu"
+            [class.active]="typeFilter() !== 'all' || dateFilter() !== 'all'">
             
                 <mat-icon>tune</mat-icon>
             
@@ -114,51 +116,81 @@
             
             }
     
-            <mat-menu #filterMenu="matMenu">
-    
-                <button mat-menu-item (click)="changeFilter('all')">
-    
-                    <mat-icon>
-    
-                        @if(filter() === 'all'){
-                        check
-                        }
-    
-                    </mat-icon>
-    
-                    <span>All</span>
-    
-                </button>
-    
-                <button mat-menu-item (click)="changeFilter('income')">
-    
-                    <mat-icon>
-    
-                        @if(filter() === 'income'){
-                        check
-                        }
-    
-                    </mat-icon>
-    
-                    <span>Income</span>
-    
-                </button>
-    
-                <button mat-menu-item (click)="changeFilter('expense')">
-    
-                    <mat-icon>
-    
-                        @if(filter() === 'expense'){
-                        check
-                        }
-    
-                    </mat-icon>
-    
-                    <span>Expense</span>
-    
-                </button>
-    
-            </mat-menu>
+        <!-- Desktop Menu -->
+
+        <mat-menu #filterMenu="matMenu">
+
+            <!-- Type -->
+
+            <div class="menu-title">Type</div>
+
+            <button mat-menu-item (click)="changeTypeFilter('all')">
+
+                <mat-icon>
+                    @if (typeFilter() === 'all') { check }
+                </mat-icon>
+
+                <span>All</span>
+
+            </button>
+
+            <button mat-menu-item (click)="changeTypeFilter('income')">
+
+                <mat-icon>
+                    @if (typeFilter() === 'income') { check }
+                </mat-icon>
+
+                <span>Income</span>
+
+            </button>
+
+            <button mat-menu-item (click)="changeTypeFilter('expense')">
+
+                <mat-icon>
+                    @if (typeFilter() === 'expense') { check }
+                </mat-icon>
+
+                <span>Expense</span>
+
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <!-- Date -->
+
+            <div class="menu-title">Date</div>
+
+            <button mat-menu-item (click)="changeDateFilter('all')">
+
+                <mat-icon>
+                    @if (dateFilter() === 'all') { check }
+                </mat-icon>
+
+                <span>All Dates</span>
+
+            </button>
+
+            <button mat-menu-item (click)="changeDateFilter('today')">
+
+                <mat-icon>
+                    @if (dateFilter() === 'today') { check }
+                </mat-icon>
+
+                <span>Today</span>
+
+            </button>
+
+            <button mat-menu-item (click)="changeDateFilter('yesterday')">
+
+                <mat-icon>
+                    @if (dateFilter() === 'yesterday') { check }
+                </mat-icon>
+
+                <span>Yesterday</span>
+
+            </button>
+
+        </mat-menu>
     
         </div>
     
@@ -171,10 +203,10 @@
     
         <app-transaction-list 
         [transactions]="transactions()" 
-        [emptyTitle]="search() || filter() !== 'all'
+        [emptyTitle]="search() || typeFilter() !== 'all' || dateFilter() !== 'all'
         ? 'No matching transactions'
         : 'No Transactions Yet'"
-        [emptyMessage]="search() || filter() !== 'all'
+        [emptyMessage]="search() || typeFilter() !== 'all' || dateFilter() !== 'all'
         ? 'Try another search or clear the filter.'
         : 'Add your first transaction.'"
         (edit)="editTransaction($event)"
